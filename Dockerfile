@@ -24,10 +24,11 @@ RUN conda install -c conda-forge jupyter_contrib_nbextensions
 RUN conda install -c conda-forge opencv 
 
 #pillow-simd: https://docs.fast.ai/performance.html#faster-image-processing
-RUN conda uninstall --force jpeg libtiff -y
-RUN conda install -c conda-forge libjpeg-turbo
-RUN CC="cc -mavx2" 
-RUN pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd
+RUN conda uninstall -y --force pillow pil jpeg libtiff libjpeg-turbo
+RUN pip uninstall -y pillow pil jpeg libtiff libjpeg-turbo
+RUN conda install -yc conda-forge libjpeg-turbo
+RUN CFLAGS="${CFLAGS} -mavx2" pip install --upgrade --no-cache-dir --force-reinstall --no-binary :all: --compile pillow-simd
+RUN conda install -y jpeg libtiff
 
 #tensorboard
 RUN conda install -c conda-forge tensorboard
@@ -48,3 +49,6 @@ RUN usermod -a -G video $USERNAME
 #switch to non root user
 USER $USERNAME
 ENV HOME /home/$USERNAME
+
+
+
