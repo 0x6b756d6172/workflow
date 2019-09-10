@@ -34,15 +34,18 @@ RUN conda install -c conda-forge tensorboard
 
 #add non root user
 #https://code.visualstudio.com/docs/remote/containers-advanced#_adding-a-nonroot-user-to-your-dev-container
-ARG USERNAME=jovyan
+ARG USERNAME=fastai
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && mkdir -p /home/$USERNAME/.vscode-server /home/$USERNAME/.vscode-server-insiders \
-    && mkdir -p /home/$USERNAME/work \
     && chown ${USER_UID}:${USER_GID} /home/$USERNAME/.vscode-server* \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
+
+#add user to video group for opencv webcam access
+RUN usermod -a -G video $USERNAME
+
+#switch to non root user
 USER $USERNAME
 ENV HOME /home/$USERNAME
