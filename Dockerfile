@@ -23,15 +23,15 @@ RUN conda install -c conda-forge jupyter_contrib_nbextensions
 #opencv, do last conda install due to number of packages
 RUN conda install -c conda-forge opencv 
 
-#pillow-simd: https://docs.fast.ai/performance.html#faster-image-processing
-RUN conda uninstall -y --force pillow pil jpeg libtiff libjpeg-turbo
-RUN pip uninstall -y pillow pil jpeg libtiff libjpeg-turbo
-RUN conda install -yc conda-forge libjpeg-turbo
-RUN CFLAGS="${CFLAGS} -mavx2" pip install --upgrade --no-cache-dir --force-reinstall --no-binary :all: --compile pillow-simd
-RUN conda install -y jpeg libtiff
-
 #tensorboard
 RUN conda install -c conda-forge tensorboard
+
+#pillow-simd: https://docs.fast.ai/performance.html#faster-image-processing
+#RUN conda uninstall -y --force pillow pil jpeg libtiff libjpeg-turbo
+#RUN pip uninstall -y pillow pil jpeg libtiff libjpeg-turbo
+#RUN conda install -yc conda-forge libjpeg-turbo
+#RUN CFLAGS="${CFLAGS} -mavx2" pip install --upgrade --no-cache-dir --force-reinstall --no-binary :all: --compile pillow-simd
+#RUN conda install -y jpeg libtiff
 
 #add non root user
 #https://code.visualstudio.com/docs/remote/containers-advanced#_adding-a-nonroot-user-to-your-dev-container
