@@ -20,13 +20,14 @@ RUN conda install -c fastai fastai
 RUN conda install -c conda-forge jupyterlab
 RUN conda install -c conda-forge jupyter_contrib_nbextensions
 
-#opencv, do last conda install due to number of packages
-RUN conda install -c conda-forge opencv 
-
 #tensorboard
 RUN conda install -c conda-forge tensorboard
 
+#opencv, do last conda install due to number of packages
+RUN conda install -c conda-forge opencv=4.1.1
+
 #pillow-simd: https://docs.fast.ai/performance.html#faster-image-processing
+#currently disabled due to version mismatch - Core version: 6.0.0.post0, Pillow version: 6.1.0
 #RUN conda uninstall -y --force pillow pil jpeg libtiff libjpeg-turbo
 #RUN pip uninstall -y pillow pil jpeg libtiff libjpeg-turbo
 #RUN conda install -yc conda-forge libjpeg-turbo
@@ -49,6 +50,3 @@ RUN usermod -a -G video $USERNAME
 #switch to non root user
 USER $USERNAME
 ENV HOME /home/$USERNAME
-
-
-
