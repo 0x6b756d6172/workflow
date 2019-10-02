@@ -1,0 +1,25 @@
+{
+	"context": "..",
+	"image": "fastai",
+	"extensions": [],
+	"runArgs": 
+	[
+		"-u", "1000:1000",
+		"--device", "/dev/video0:/dev/video0",
+		"-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+		"-v","/var/run/docker.sock:/var/run/docker.sock",
+		"--group-add", "video",
+		"-e", "DISPLAY=:0",
+		"--gpus", "all",
+		"--shm-size", "16G"
+	],
+	
+	"settings": 
+	{ 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+	
+	"appPort": ["8888:8888", "6006:6006"],
+	"postCreateCommand": "/bin/bash -c 'jupyter lab --ip=0.0.0.0 --notebook-dir=/workspaces &>/dev/null &'",
+	"shutdownAction": "none"
+}
