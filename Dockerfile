@@ -22,6 +22,8 @@ RUN conda install -c conda-forge jupyter_contrib_nbextensions
 
 #tensorboard
 RUN conda install -c conda-forge tensorboard
+RUN pip install future
+RUN pip install ipywidgets
 
 #opencv, do last conda install due to number of packages
 RUN conda install -c conda-forge opencv=4.1.1
