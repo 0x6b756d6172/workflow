@@ -1,7 +1,6 @@
 {
 	"context": "..",
 	"image": "fastai",
-	"extensions": [],
 	"runArgs": 
 	[
 		"-u", "1000:1000",
@@ -19,6 +18,7 @@
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 	
+	"extensions" : ["ms-azuretools.vscode-docker", "ms-python.python"],
 	"appPort": ["8888:8888", "6006:6006"],
 	"postCreateCommand": "/bin/bash -c 'jupyter lab --ip=0.0.0.0 --notebook-dir=/workspaces &>/dev/null &'",
 	"shutdownAction": "none"

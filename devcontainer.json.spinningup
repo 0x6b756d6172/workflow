@@ -1,0 +1,19 @@
+{
+    "context": "..",
+    "dockerFile": "../Dockerfile",
+    "extensions": [],
+    "runArgs": 
+    [
+        "-u", "1000:1000",
+        "--gpus", "all",
+        "--shm-size", "16G",
+        "-e", "DISPLAY=:0", //for graphical output
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix" //for graphical output
+    ],
+    "settings": 
+    { 
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    
+    "postCreateCommand": "pip3 install -e ."
+}
